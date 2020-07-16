@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "DemoLogin";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bug.Net | Demo Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" type="image" href="~/Images/BugNetLogo.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/all.min.css" rel="stylesheet">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="~/Content/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/adminlte.css" rel="stylesheet">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script src="//kit.fontawesome.com/c2b25f7a3b.js" crossorigin="anonymous"></script>
+</head>
+
+@*<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card-body">
+                <h5 class="text-center">Admin Demo</h5>
+                <p class="text-center">top level user</p>
+                <div class="col-8 offset-2">
+                    @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken();
+                        @Html.Hidden("emailKey", "DemoAdminEmail") 
+
+                        <button type="submit" class="btn btn-primary btn-block"></button>
+                    }
+
+                    @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken();
+                        @Html.Hidden("emailKey", "DemoPMEmail") 
+
+                        <button type="submit" class="btn btn-primary btn-block"></button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>*@
+
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="../../index2.html"><b>Bug.Net User Login</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Choose a Demo User for your session</p>
+
+                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("emailKey", "DemoAdminEmail");
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-danger btn-block">Administrator</button>
+                        </div>
+                    </div>
+                    <p class="login-box-msg">Control over everything</p>
+                }
+                <br />
+
+
+                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("emailKey", "DemoPMEmail");
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success btn-block">Project Manager</button>
+                        </div>
+                    </div>
+                    <p class="login-box-msg">Manages projects and users</p>
+                }
+                <br />
+
+                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("emailKey", "DemoDevEmail");
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Developer</button>
+                        </div>
+                    </div>
+                    <p class="login-box-msg">Manages assigned tickets</p>
+                }
+                <br />
+                @using (Html.BeginForm("DemoLoginAsync", "Account", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken();
+                    @Html.Hidden("emailKey", "DemoSubEmail");
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-warning btn-block">Submitter</button>
+                        </div>
+                    </div>
+                    <p class="login-box-msg">Creates new tickets</p>
+                }
+                <br />
+
+                <div class="row">
+                    <div class="col">
+                        <a class="nav-link" href="@Url.Action("DemoLoginAsync", "Account", new { type = "submit", name = "emailKey"});
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-olive"><i class="fas "></i></span>
+
+                                    <p class="mb-0">
+                                        @*<a href="register.html" class="text-center">Register a new membership</a>*@
+                                        @Html.ActionLink("Register a new membership", "Register", "Account", null, new { @class = "text-center" })
+                                    </p>
+                                </div>
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

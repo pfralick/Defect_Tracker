@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Falcon_Bug_Tracker.ViewModel.UserRoleData>
+@{
+    ViewBag.Title = "ManageRoles";
+}
+
+
+<h2>Manage Roles</h2>
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            @*Left column that hold the users*@
+            <div class="col">
+                @Html.ListBox("UserIds")
+            </div>
+
+            @*Right column for holding my Roles*@
+            <div class="col">
+                @Html.DropDownList("RoleName", "-Select Role-")
+            </div>
+        </div>
+        <br />
+        <div class="row"
+        <div class="col">
+            <button type="submit" class="btn btn-primary" style="width:100%;">Assign to Role</button>
+        </div>
+    @*</div>*@
+    }
+
+    <hr />
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Full Name")
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoleName)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => user.FullName)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => user.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.RoleName)
+                </td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
+
+
+
+
+</div>

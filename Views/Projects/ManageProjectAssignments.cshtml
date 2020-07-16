@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Falcon_Bug_Tracker.ViewModel.CustomUserData>
+@{
+    ViewBag.Title = "Manage Project Assignments";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="container">
+
+    @using (Html.BeginForm("ManageProjectAssignments", "Projects", FormMethod.Post, new { id = "frmManageProjects" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            @*Left column that holds the users*@
+            <div class="col">
+                @Html.ListBox("UserIds")
+            </div>
+
+            @*Right column for holding my Roles*@
+            <div class="col">
+                @Html.ListBox("ProjectIds")
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <button id="btn-ManageProjects" class="btn btn-primary" style="width:100%;">Assign user to project</button>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+<table class="table table-striped col-md-8">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Full Name")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayName("Projects")
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => user.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Email)
+                </td>
+                <td>
+                    @foreach (var projName in user.ProjectNames)
+                    {
+                        @projName
+                        <br>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<p>
+    <a href="@Url.Action("Create", "Projects")" class="btn btn-primary">Create New Project</a>
+</p>
+
+@section  scripts{
+    <script>
+        $("#btn-ManageProjects").on("click", function (event) {
+            event.preventDefault();
+            $("#frmManageProjects").submit();
+        })
+
+    </script>
+}

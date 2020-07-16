@@ -1,0 +1,327 @@
+﻿@using Falcon_Bug_Tracker.ViewModel
+@model DashboardViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+<div class="pd-30">
+    <h3 class="tx-gray-800 mg-b-5"></h3>
+</div>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Bug.Net Dashboard</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v1</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>@Model.TicketCount</h3>
+
+                        <p>Ticket Count</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-plus-circled"></i>
+                    </div>
+                    <a href="@Url.Action("Create", "Tickets")" class="small-box-footer">Create Ticket<i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>@Model.ProjectVM.ProjectCount<sup style="font-size: 20px"></sup></h3>
+
+                        <p>Project Count</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="@Url.Action("Create", "Projects")" class="small-box-footer">Create Project<i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>@Model.HighPriorityTicketCount</h3>
+
+                        <p>High Priority Ticket Count:</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Tickets")" class="small-box-footer">More Info<i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>@Model.NewTicketCount</h3>
+
+                        <p>New Ticket Count</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Tickets")" class="small-box-footer">More Info<i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+
+        <div class="br-pagebody mg-t-5 pd-x-30">
+            @*Ticket Count: @Model.TicketCount <br />
+            High Priority Ticket Count: @Model.HighPriorityTicketCount <br />
+            New Ticket Count: @Model.NewTicketCount <br />
+            Total Comments: @Model.TotalComments*@
+
+            <hr />
+            @*Project Count: @Model.ProjectVM.ProjectCount*@
+
+            
+
+            All Projects: <br />
+            <table class="table table-striped table-sm thead-dark col-md-10">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("Project Name")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Description")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Created")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Updated")
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach (var project in Model.ProjectVM.AllProjects)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Created)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => project.Updated)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <p>
+            <a href="@Url.Action("Index", "Projects")" class="btn btn-primary">Manage Projects</a>
+        </p>
+
+        Total Comments: @Model.TotalComments
+
+
+
+        @foreach (var pm in Model.ProjectVM.AllPMs)
+        {
+            <h3>PMs: @pm.FullName</h3>
+        }
+
+
+        <!--Chart Section-->
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AdminLTE 3 | ChartJS</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="~/Content/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Add Content Here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+            <!-- ./wrapper -->
+            <!-- jQuery -->
+            <script src="~/Scripts/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+            <!-- ChartJS -->
+            <script src="~/Scripts/Chart.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="~/Scripts/adminlte.min.js"></script>
+            <!-- AdminLTE for demo purposes -->
+            <script src="~/Scripts/demo.js"></script>
+
+
+            <!-- DONUT CHART -->
+            <div class="row">
+                <div class="card card-danger col-sm-6">
+                    <div class="card-header">
+                        <h3 class="card-title">General Statistics</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                            </div>
+                    </div>
+                        <div class="card-body">
+                            <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                <!-- PIE CHART -->
+                <div class="card card-danger col-sm-6">
+                    <div class="card-header">
+                        <h3 class="card-title">Ticket Priority</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+    </div>
+
+    @section scripts {
+        <script>
+        var unAuthorizedTicketAccess = '@TempData["UnauthorizedTicketAccess"]';
+        if (unAuthorzedTicketAccess != "") {
+            Swal.fire({
+                title: 'Account Error!',
+                text: unconfirmedEmailError,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
+        }
+
+        </script>
+    }
+
+
+
+
+
+    <!-- page script for charts-->
+    <script>
+        $(function () {
+
+            //-------------
+            //- DONUT CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Ticket Count',
+                    'Project Count',
+                    'New Ticket Count',
+                    'Comments'
+                ],
+                datasets: [
+                    {
+                        data: [@Model.TicketCount,@Model.ProjectVM.ProjectCount,@Model.NewTicketCount,@Model.TotalComments],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
+                    }
+                ]
+            }
+
+
+             var pieData = {
+                labels: [
+                    'High',
+                    'Medium',
+                    'Low'
+                ],
+                datasets: [
+                    {
+                        data: [@Model.HighPriorityTicketCount,1,1],
+                        backgroundColor: ['#3c8dbc', '#d2d6de', '#f39c12'],
+                    }
+                ]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var donutChart = new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+
+            //-------------
+            //- PIE CHART -
+            //-------------
+            // Get context with jQuery - using jQuery's .get() method.
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieData = pieData;
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            var pieChart = new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+
+
+
+
+
+
+
+        })
+    </script>
+

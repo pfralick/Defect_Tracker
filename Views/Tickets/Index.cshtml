@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Falcon_Bug_Tracker.Models.Ticket>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Manage Tickets</h2>
+
+
+@if(User.IsInRole("SUB"))
+{
+<p>
+    <a href="@Url.Action("Create", "Tickets")" class="btn btn-primary">Create New</a>
+</p>
+}
+
+<table class="table table-primary table-responsive">
+    <h4></h4>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Developer.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Submitter.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketStatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketPriorityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsArchived)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Developer.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Submitter.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketTypeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketStatusId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketPriorityId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Updated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsArchived)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn-info" }) 
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn-success" })
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+
+
+        }
+
+    </tbody>
+
+</table>
+<p>
+    <a href="@Url.Action("Dashboard","Tickets", new { id = 1 })" class="btn btn-primary">Ticket Dashboard</a>
+</p>
+
